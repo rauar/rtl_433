@@ -271,6 +271,7 @@
     DECL(geevon) \
     DECL(fineoffset_wh46) \
     DECL(vevor_7in1) \
+    DECL(diy_temperature_array) \
 
     /* Add new decoders here. */
 
