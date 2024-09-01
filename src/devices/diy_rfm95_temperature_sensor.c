@@ -137,5 +137,6 @@ r_device const diy_temperature_array = {
         .reset_limit = 9600,
         .decode_fn   = &dyi_temperature_sensor_callback,
         .fields      = output_fields,
+        .disabled    = 0,
 };
 
