@@ -15,6 +15,7 @@
  - Preamble: aaaa
  - Sync Word: 0xDE 0xAD
  - Model ID: 8bit
+ - Message Type: 8bit
  - Temp 1: 16bit
  - Temp 2: 16bit
  - Temp 3: 16bit
@@ -27,7 +28,7 @@
 #include "decoder.h"
 
 
-#define TOTAL_PAYLOAD_LENGTH_WITH_CRC_BYTES 13
+#define TOTAL_PAYLOAD_LENGTH_WITH_CRC_BYTES 14
 
 static int dyi_temperature_sensor_callback(r_device *decoder, bitbuffer_t *bitbuffer)
 {
@@ -87,16 +88,17 @@ static int dyi_temperature_sensor_callback(r_device *decoder, bitbuffer_t *bitbu
     uint8_t *b = databits.bb[0];
 
     data_t *data;
-    int device, crc;
+    int device, messageType, crc;
     float temp_raw_1, temp_raw_2, temp_raw_3, temp_raw_4, vBatt_raw;
 
     device  = (b[0]);
-    temp_raw_1 = (int16_t)(((b[1]) << 8) | (b[2] )) / 100.0;
-    temp_raw_2 = (int16_t)(((b[3]) << 8) | (b[4] )) / 100.0;
-    temp_raw_3 = (int16_t)(((b[5]) << 8) | (b[6] )) / 100.0;
-    temp_raw_4 = (int16_t)(((b[7]) << 8) | (b[8] )) / 100.0;
-    vBatt_raw =  (int16_t)(((b[9]) << 8) | (b[10] )) / 100.0;
-    crc =        (int16_t)(((b[11]) << 8) | (b[12] ));
+    messageType  = (b[1]);
+    temp_raw_1 = (int16_t)(((b[2]) << 8) | (b[3] )) / 100.0;
+    temp_raw_2 = (int16_t)(((b[4]) << 8) | (b[5] )) / 100.0;
+    temp_raw_3 = (int16_t)(((b[6]) << 8) | (b[7] )) / 100.0;
+    temp_raw_4 = (int16_t)(((b[8]) << 8) | (b[9] )) / 100.0;
+    vBatt_raw =  (int16_t)(((b[10]) << 8) | (b[11] )) / 100.0;
+    crc =        (int16_t)(((b[12]) << 8) | (b[13] ));
 
     // uint16_t crc_calc = crc16(b, 14, 0x1021, 0x0000);
 
@@ -104,8 +106,9 @@ static int dyi_temperature_sensor_callback(r_device *decoder, bitbuffer_t *bitbu
 
     /* clang-format off */
     data = data_make(
-            "model",            "",                DATA_STRING,    "DYI Temperature Array Sensor",
-            "id",               "Id",              DATA_INT,       device,
+            "model",             "",               DATA_STRING,    "DYI-Temperature-Array-Sensor",
+            "id",                "Id",             DATA_INT,       device,
+            "messageType",       "Message Type",   DATA_INT,       device,
             "temperature1_C",    "Temperature 1",  DATA_FORMAT,    "%.2fC",  DATA_DOUBLE,    temp_raw_1,
             "temperature2_C",    "Temperature 2",  DATA_FORMAT,    "%.2fC",  DATA_DOUBLE,    temp_raw_2,
             "temperature3_C",    "Temperature 3",  DATA_FORMAT,    "%.2fC",  DATA_DOUBLE,    temp_raw_3,
