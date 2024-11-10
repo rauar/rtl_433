@@ -271,6 +271,10 @@
     DECL(geevon) \
     DECL(fineoffset_wh46) \
     DECL(vevor_7in1) \
+    DECL(arexx_ml) \
+    DECL(rosstech_dcu706) \
+    DECL(risco_agility) \
+    DECL(thermopro_tp828b) \
     DECL(diy_temperature_array) \
 
     /* Add new decoders here. */

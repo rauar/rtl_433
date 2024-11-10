@@ -54,6 +54,7 @@ add_library(r_433 STATIC
     devices/ant_antplus.c
     devices/arad_ms_meter.c
     devices/archos_tbh.c
+    devices/arexx_ml.c
     devices/atech_ws308.c
     devices/auriol_4ld5661.c
     devices/auriol_aft77b2.c
@@ -202,7 +203,9 @@ add_library(r_433 STATIC
     devices/regency_fan.c
     devices/revolt_nc5462.c
     devices/rftech.c
+    devices/risco_agility.c
     devices/rojaflex.c
+    devices/rosstech_dcu706.c
     devices/rubicson.c
     devices/rubicson_48659.c
     devices/rubicson_pool_48942.c
@@ -234,7 +237,7 @@ add_library(r_433 STATIC
     devices/thermopro_tp11.c
     devices/thermopro_tp12.c
     devices/thermopro_tp28b.c
-    devices/thermopro_tp829b.c
+    devices/thermopro_tp82xb.c
     devices/thermopro_tx2.c
     devices/thermopro_tx2c.c
     devices/thermor.c
